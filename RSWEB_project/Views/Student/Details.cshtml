@@ -1,0 +1,72 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div style="text-align: center;">
+    <a class="btn btn-primary" asp-action="Index">BACK</a>
+    <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">EDIT</a>
+    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">DELETE</a>
+</div>
+
+<hr />
+
+<dl class="row" style="width: 59%; margin-left: 39%;">
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.StudentId)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.StudentId)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.FirstName)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.LastName)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.EnrollmentDate)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.EnrollmentDate)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.AcquiredCredits)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.AcquiredCredits)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.CurrentSemestar)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.CurrentSemestar)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.EducationLevel)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.EducationLevel)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayName("Enrolled Courses")
+    </dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.Enrollments)
+        {
+            <a asp-controller="Enrollment" asp-action="Details" asp-route-id="@item.Id">
+                @Html.DisplayFor(modelItem => item.Course.Title)
+                <br />
+            </a>
+        }
+        <a class="btn btn-success" style="margin-top: 10px;" asp-controller="Enrollment" asp-action="Create">
+        Add Enrollment</a>
+    </dd>
+</dl>

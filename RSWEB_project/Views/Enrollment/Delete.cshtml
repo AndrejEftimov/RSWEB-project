@@ -1,0 +1,88 @@
+﻿@model Enrollment
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div style="text-align: center;">
+    <a class="btn btn-primary" asp-action="Details" asp-route-id="@Model.Id">BACK</a>
+</div>
+
+<hr />
+
+<dl class="row" style="width: 59%; margin-left: 39%;">
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Semester)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Semester)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Year)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Year)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Grade)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Grade)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.SeminalUrl)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.SeminalUrl)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.ProjectUrl)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.ProjectUrl)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.ExamPoints)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.ExamPoints)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.SeminalPoints)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.SeminalPoints)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.AdditionalPoints)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.AdditionalPoints)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.FinishDate)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.FinishDate)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Course)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Course.Title)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Student)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Student.FirstName)
+    </dd>
+</dl>
+
+<br />
+
+<h5 style="text-align: center; width: 100%;">Are you sure?</h5>
+<form asp-action="Delete" style="width: 100%; text-align: center; display: inline-block;">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="DELETE ENROLLMENT" class="btn btn-danger" />
+</form>

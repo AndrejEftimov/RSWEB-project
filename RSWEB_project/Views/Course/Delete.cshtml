@@ -1,0 +1,64 @@
+﻿@model Course
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div style="text-align: center;">
+    <a class="btn btn-primary" asp-action="Details" asp-route-id="@Model.Id">BACK</a>
+</div>
+
+<hr />
+
+<dl class="row" style="width: 59%; margin-left: 39%;">
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Title)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Title)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Credits)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Credits)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Semester)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Semester)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Programme)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Programme)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.EducationLevel)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.EducationLevel)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayName("First Teacher")
+    </dt>
+    <dd class="col-sm-9">
+        <a asp-controller="Teacher" asp-action="Details" asp-route-id="@Model.FirstTeacherId">@Html.DisplayFor(ModelItem => Model.Teacher1.FullName)</a>
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayName("Second Teacher")
+    </dt>
+    <dd class="col-sm-9">
+        <a asp-controller="Teacher" asp-action="Details" asp-route-id="@Model.SecondTeacherId">@Html.DisplayFor(ModelItem => Model.Teacher2.FullName)</a>
+    </dd>
+</dl>
+
+<br />
+
+<h5 style="text-align: center; width: 100%;">Are you sure?</h5>
+<form asp-action="Delete" style="width: 100%; text-align: center; display: inline-block;">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="DELETE COURSE" class="btn btn-danger" />
+</form>

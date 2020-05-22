@@ -1,0 +1,72 @@
+﻿@model Course
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div style="text-align: center;">
+    <a class="btn btn-primary" asp-action="Index">BACK</a>
+    <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">EDIT</a>
+    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">DELETE</a>
+</div>
+
+<hr />
+
+<dl class="row" style="width: 59%; margin-left: 39%;">
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Title)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Title)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Credits)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Credits)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Semester)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Semester)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Programme)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Programme)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.EducationLevel)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.EducationLevel)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Teacher1)
+    </dt>
+    <dd class="col-sm-9">
+        <a asp-controller="Teacher" asp-action="Details" asp-route-id="@Model.FirstTeacherId">@Html.DisplayFor(ModelItem => Model.Teacher1.FullName)</a>
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Teacher2)
+    </dt>
+    <dd class="col-sm-9">
+        <a asp-controller="Teacher" asp-action="Details" asp-route-id="@Model.SecondTeacherId">@Html.DisplayFor(ModelItem => Model.Teacher2.FullName)</a>
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayName("Enrolled Students")
+    </dt>
+    <dd class="col-sm-9">
+        @foreach (var studenti in Model.Enrollments)
+        {
+            <a asp-controller="Enrollment" asp-action="Details" asp-route-id="@studenti.Id">
+                @Html.DisplayFor(modelItem => studenti.Student.FullName)
+            </a>
+            <br />
+        }
+        <a class="btn btn-success" style="margin-top: 10px;" asp-controller="Enrollment" asp-action="Create">
+        Add Enrollment</a>
+    </dd>
+</dl>

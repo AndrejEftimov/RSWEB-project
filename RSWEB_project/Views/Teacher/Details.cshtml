@@ -1,0 +1,71 @@
+﻿@model Teacher
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div style="text-align: center;">
+    <a class="btn btn-primary" asp-action="Index">BACK</a>
+    <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">EDIT</a>
+    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">DELETE</a>
+</div>
+
+<hr />
+
+<dl class="row" style="width: 59%; margin-left: 39%;">
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.FirstName)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.LastName)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Degree)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Degree)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.AcademicRank)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.AcademicRank)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.OfficeNumber)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.OfficeNumber)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.HireDate)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.HireDate)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayName("Courses taught")
+    </dt>
+    <dd class="col-sm-9">
+        @foreach (var course in Model.Courses1)
+        {
+            <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">
+                @Html.DisplayFor(modelItem => course.Title)
+            </a>
+            <br />
+        }
+        @foreach (var course in Model.Courses2)
+        {
+            <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">
+                @Html.DisplayFor(modelItem => course.Title)
+            </a>
+            <br />
+        }
+    </dd>
+</dl>
