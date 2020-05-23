@@ -44,8 +44,8 @@ namespace RSWEB_project.Controllers
                 "StudentIdD" => students.OrderByDescending(s => s.StudentId),
                 "Date" => students.OrderBy(s => s.EnrollmentDate),
                 "DateD" => students.OrderByDescending(s => s.EnrollmentDate),
-                "Semester" => students.OrderBy(s => s.CurrentSemestar),
-                "SemesterD" => students.OrderByDescending(s => s.CurrentSemestar),
+                "Semester" => students.OrderBy(s => s.CurrentSemester),
+                "SemesterD" => students.OrderByDescending(s => s.CurrentSemester),
                 "LNameD" => students.OrderByDescending(s => s.LastName),
                 "EducationLevel" => students.OrderBy(s => s.EducationLevel),
                 "EducationLevelD" => students.OrderByDescending(s => s.EducationLevel),
@@ -99,7 +99,7 @@ namespace RSWEB_project.Controllers
         // Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StudentId,FirstName,LastName,EnrollmentDate,AcquiredCredits,CurrentSemestar,EducationLevel")] Student student)
+        public async Task<IActionResult> Create([Bind("Id,StudentId,FirstName,LastName,EnrollmentDate,AcquiredCredits,CurrentSemester,EducationLevel")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +129,7 @@ namespace RSWEB_project.Controllers
         // Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,StudentId,FirstName,LastName,EnrollmentDate,AcquiredCredits,CurrentSemestar,EducationLevel")] Student student)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,StudentId,FirstName,LastName,EnrollmentDate,AcquiredCredits,CurrentSemester,EducationLevel")] Student student)
         {
             if (id != student.Id)
             {

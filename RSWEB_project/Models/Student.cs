@@ -36,7 +36,7 @@ namespace RSWEB_project.Models
         public int AcquiredCredits { get; set; }
 
         [Display(Name = "Current Semester")]
-        public int CurrentSemestar { get; set; }
+        public int CurrentSemester { get; set; }
 
         [StringLength(25)]
         [Display(Name = "Education Level")]

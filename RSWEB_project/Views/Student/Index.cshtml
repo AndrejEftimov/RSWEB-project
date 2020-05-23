@@ -44,7 +44,7 @@
                 </th>
                 <th>
                     <a asp-action="Index" asp-route-sortOrder="@ViewData["SemSort"]">
-                        @Html.DisplayNameFor(model => model.CurrentSemestar)
+                        @Html.DisplayNameFor(model => model.CurrentSemester)
                     </a>
                 </th>
                 <th>
@@ -75,7 +75,7 @@
                         @Html.DisplayFor(modelItem => item.AcquiredCredits)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CurrentSemestar)
+                        @Html.DisplayFor(modelItem => item.CurrentSemester)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.EducationLevel)
