@@ -80,14 +80,21 @@ namespace RSWEB_project.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Course.Include(t => t.Teacher1).Include(t => t.Teacher2).Include(c => c.Enrollments).ThenInclude(c => c.Student)
+            var course = await _context.Course
+                .Include(t => t.Teacher1)
+                .Include(t => t.Teacher2)
+                .Include(c => c.Enrollments)
+                .ThenInclude(c => c.Student)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (course == null)
             {
                 return NotFound();
             }
+
             ViewData["FirstTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName", course.FirstTeacherId);
             ViewData["SecondTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName", course.SecondTeacherId);
+
             return View(course);
         }
 
@@ -96,6 +103,7 @@ namespace RSWEB_project.Controllers
         {
             ViewData["FirstTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName");
             ViewData["SecondTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName");
+
             return View();
         }
 
@@ -110,8 +118,10 @@ namespace RSWEB_project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["FirstTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName", course.FirstTeacherId);
             ViewData["SecondTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName", course.SecondTeacherId);
+
             return View(course);
         }
 
@@ -124,12 +134,15 @@ namespace RSWEB_project.Controllers
             }
 
             var course = await _context.Course.FindAsync(id);
+
             if (course == null)
             {
                 return NotFound();
             }
+
             ViewData["FirstTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName", course.FirstTeacherId);
             ViewData["SecondTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName", course.SecondTeacherId);
+
             return View(course);
         }
 
@@ -161,10 +174,13 @@ namespace RSWEB_project.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["FirstTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName", course.FirstTeacherId);
             ViewData["SecondTeacherId"] = new SelectList(_context.Teacher, "Id", "FullName", course.SecondTeacherId);
+
             return View(course);
         }
 
@@ -176,15 +192,19 @@ namespace RSWEB_project.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Course.Include(c => c.Teacher1).Include(c => c.Teacher2)
+            var course = await _context.Course
+                .Include(c => c.Teacher1)
+                .Include(c => c.Teacher2)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (course == null)
             {
                 return NotFound();
             }
+
             ViewData["FirstTeacherId"] = new SelectList(_context.Teacher, "id", "FullName", course.FirstTeacherId);
             ViewData["SecondTeacherId"] = new SelectList(_context.Teacher, "id", "FullName", course.SecondTeacherId);
+
             return View(course);
         }
 
@@ -202,6 +222,24 @@ namespace RSWEB_project.Controllers
         private bool CourseExists(int id)
         {
             return _context.Course.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> TeacherIndex(int teacherId)
+        {
+            var courses = from c in _context.Course
+                          select c;
+
+            courses = courses.Include(c => c.Teacher2).Include(c => c.Teacher1).Include(c => c.Enrollments).ThenInclude(c => c.Student);
+            courses = courses.Where(c => c.Teacher1.Id.Equals(teacherId) || c.Teacher2.Id.Equals(teacherId));
+
+            ViewData["TeacherId"] = teacherId;
+
+            // for the _NonAdminLayout
+            Teacher t = await _context.Teacher.FindAsync(teacherId);
+            ViewData["ProfilePicture"] = t.ProfilePicture;
+            ViewData["FullName"] = t.FullName;
+
+            return View(await courses.ToListAsync());
         }
     }
 }

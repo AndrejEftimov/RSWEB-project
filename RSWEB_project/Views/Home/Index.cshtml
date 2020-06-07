@@ -1,14 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@{ 
+    ViewData["Title"] = "Index";
+    Layout = "_NonAdminLayout";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Select Category</h1>
+    <h1 class="display-4"> &gt; Login As &lt;</h1>
 </div>
 
 <div class="home-index-wrapper">
-    <a class="btn-HOME" asp-controller="Student" asp-action="Index"><p>Students</p></a>
-    <a class="btn-HOME" asp-controller="Teacher" asp-action="Index"><p>Teachers</p></a>
-    <a class="btn-HOME" asp-controller="Course" asp-action="Index"><p>Courses</p></a>
-    <a class="btn-HOME" asp-controller="Enrollment" asp-action="Index"><p>Enrollments</p></a>
+    <a class="btn-HOME" asp-controller="Home" asp-action="AdminIndex"><p>Admin</p></a>
+    <a class="btn-HOME" asp-controller="Teacher" asp-action="TeacherLogin"><p>Teacher</p></a>
+    <a class="btn-HOME" asp-controller="Student" asp-action="StudentLogin"><p>Student</p></a>
 </div>

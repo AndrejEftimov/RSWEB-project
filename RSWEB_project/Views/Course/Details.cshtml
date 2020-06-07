@@ -59,14 +59,27 @@
         @Html.DisplayName("Enrolled Students")
     </dt>
     <dd class="col-sm-9">
-        @foreach (var studenti in Model.Enrollments)
+        @foreach (var e in Model.Enrollments)
         {
-            <a asp-controller="Enrollment" asp-action="Details" asp-route-id="@studenti.Id">
-                @Html.DisplayFor(modelItem => studenti.Student.FullName)
-            </a>
-            <br />
+            if (e.FinishDate == null)
+            {
+                <a asp-controller="Enrollment" asp-action="Details" asp-route-id="@e.Id">
+                    @Html.DisplayFor(modelItem => e.Student.FullName)
+                </a>
+                <br />
+            }
         }
-        <a class="btn btn-success" style="margin-top: 10px;" asp-controller="Enrollment" asp-action="Create">
-        Add Enrollment</a>
+    </dd>
+    <dt class="col-sm-3"></dt>
+    <dd class="col-sm-9">
+        <a class="btn btn-success" style="min-width: 19%;" asp-controller="Enrollment" asp-action="AdminCreate">
+            Add Enrollments
+        </a>
+    </dd>
+    <dt class="col-sm-3"></dt>
+    <dd class="col-sm-9">
+        <a class="btn btn-info" style="min-width: 19%;" asp-controller="Enrollment" asp-action="AdminEditMultiple" asp-route-courseId="@Model.Id">
+            Unenroll Students
+        </a>
     </dd>
 </dl>

@@ -67,23 +67,23 @@ namespace RSWEB_project.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AdditionalPoints")
+                    b.Property<int?>("AdditionalPoints")
                         .HasColumnType("int");
 
                     b.Property<int?>("CourseId")
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("ExamPoints")
+                    b.Property<int?>("ExamPoints")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FinishDate")
+                    b.Property<DateTime?>("FinishDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Grade")
+                    b.Property<int?>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProjectPoints")
+                    b.Property<int?>("ProjectPoints")
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectUrl")
@@ -91,10 +91,11 @@ namespace RSWEB_project.Migrations
                         .HasMaxLength(255);
 
                     b.Property<string>("Semester")
+                        .IsRequired()
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.Property<int>("SeminalPoints")
+                    b.Property<int?>("SeminalPoints")
                         .HasColumnType("int");
 
                     b.Property<string>("SeminalUrl")
@@ -147,6 +148,9 @@ namespace RSWEB_project.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("StudentId")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
@@ -184,6 +188,9 @@ namespace RSWEB_project.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("OfficeNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePicture")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

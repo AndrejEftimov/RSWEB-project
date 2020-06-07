@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RSWEB_project.Models;
+using RSWEB_project.ViewModels;
 
 namespace RSWEB_project.Controllers
 {
     public class TeacherController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-        public TeacherController(AppDbContext context)
+        public TeacherController(AppDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            webHostEnvironment = hostEnvironment;
         }
 
         // Index
@@ -66,6 +71,7 @@ namespace RSWEB_project.Controllers
 
             var teacher = await _context.Teacher.Include(t=>t.Courses1).Include(t=>t.Courses2)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (teacher == null)
             {
                 return NotFound();
@@ -83,15 +89,28 @@ namespace RSWEB_project.Controllers
         // Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Degree,AcademicRank,OfficeNumber,HireDate")] Teacher teacher)
+        public async Task<IActionResult> Create(TeacherViewModel ViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(teacher);
+                if(ViewModel.ProfileImage != null)
+                {
+                    string uniqueFileName = UploadedFile(ViewModel);
+                    ViewModel.Teacher.ProfilePicture = uniqueFileName;
+                }
+
+                else
+                {
+                    ViewModel.Teacher.ProfilePicture = "_default.png";
+                }
+
+                _context.Add(ViewModel.Teacher);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(teacher);
+
+            return View(ViewModel);
         }
 
         // Edit/id
@@ -107,15 +126,22 @@ namespace RSWEB_project.Controllers
             {
                 return NotFound();
             }
-            return View(teacher);
+
+            TeacherViewModel ViewModel = new TeacherViewModel
+            {
+                Teacher = teacher,
+                ProfileImage = null
+            };
+
+            return View(ViewModel);
         }
 
         // Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Degree,AcademicRank,OfficeNumber,HireDate")] Teacher teacher)
+        public async Task<IActionResult> Edit(int id, TeacherViewModel ViewModel)
         {
-            if (id != teacher.Id)
+            if (id != ViewModel.Teacher.Id)
             {
                 return NotFound();
             }
@@ -124,12 +150,18 @@ namespace RSWEB_project.Controllers
             {
                 try
                 {
-                    _context.Update(teacher);
+                    if(ViewModel.ProfileImage != null)
+                    {
+                        string uniqueFileName = UploadedFile(ViewModel);
+                        ViewModel.Teacher.ProfilePicture = uniqueFileName;
+                    }
+
+                    _context.Update(ViewModel.Teacher);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TeacherExists(teacher.Id))
+                    if (!TeacherExists(ViewModel.Teacher.Id))
                     {
                         return NotFound();
                     }
@@ -138,9 +170,11 @@ namespace RSWEB_project.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(teacher);
+
+            return View(ViewModel);
         }
 
         // Delete/id
@@ -175,6 +209,32 @@ namespace RSWEB_project.Controllers
         private bool TeacherExists(int id)
         {
             return _context.Teacher.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> TeacherLogin()
+        {
+            var teachers = from m in _context.Teacher
+                           select m;
+
+            return View(await teachers.ToListAsync());
+        }
+
+        private string UploadedFile(TeacherViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.ProfileImage != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(model.ProfileImage.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ProfileImage.CopyTo(fileStream);
+                }
+            }
+
+            return uniqueFileName;
         }
     }
 }

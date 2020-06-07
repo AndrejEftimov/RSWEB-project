@@ -24,16 +24,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" style="margin-left: 20px; @(ViewData["CurrentPage"] as string == "Students" ? "font-weight: bold;" : "")" asp-controller="Student" asp-action="Index">Students</a>
+                            <a class="nav-link text-dark" style="margin-left: 20px; @(ViewData["CurrentPage"] as string == "Students" ? "font-weight: bold;" : "")"
+                               asp-controller="Student" asp-action="Index">Students</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" style="margin-left: 20px; @(ViewData["CurrentPage"] as string == "Teachers" ? "font-weight: bold;" : "")" asp-controller="Teacher" asp-action="Index"> Teachers</a>
+                            <a class="nav-link text-dark" style="margin-left: 20px; @(ViewData["CurrentPage"] as string == "Teachers" ? "font-weight: bold;" : "")"
+                               asp-controller="Teacher" asp-action="Index">Teachers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" style="margin-left: 20px; @(ViewData["CurrentPage"] as string == "Courses" ? "font-weight: bold;" : "")" asp-controller="Course" asp-action="Index">Courses</a>
+                            <a class="nav-link text-dark" style="margin-left: 20px; @(ViewData["CurrentPage"] as string == "Courses" ? "font-weight: bold;" : "")"
+                               asp-controller="Course" asp-action="Index">Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" style="margin-left: 20px; @(ViewData["CurrentPage"] as string == "Enrollments" ? "font-weight: bold;" : "")" asp-controller="Enrollment" asp-action="Index">Enrollments</a>
+                            <a class="nav-link text-dark" style="margin-left: 20px; @(ViewData["CurrentPage"] as string == "Enrollments" ? "font-weight: bold;" : "")"
+                               asp-controller="Enrollment" asp-action="Index">Enrollments</a>
                         </li>
                     </ul>
                 </div>
@@ -43,7 +47,7 @@
     </header>
     
 
-    <div style="margin-bottom: 80px;"> <!--for the footer (footer is fixed and height is 60px)-->
+    <div style="padding-bottom: 80px;"> <!--for the footer (footer is fixed and height is 60px)-->
         @RenderBody()
     </div>
 

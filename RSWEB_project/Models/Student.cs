@@ -16,7 +16,7 @@ namespace RSWEB_project.Models
         [Required]
         [Display(Name ="StudentID")]
         [StringLength(20)]
-        public string StudentId { get; set; }
+        public string StudentId { get; set; } //t.e. Indeks
 
         [Required]
         [StringLength(50)]
@@ -42,6 +42,10 @@ namespace RSWEB_project.Models
         [Display(Name = "Education Level")]
         public string EducationLevel { get; set; }
 
+        [Display(Name = "Profile Picture")]
+        public string ProfilePicture { get; set; }
+
+        [Display(Name = "Full Name")]
         public string FullName
         {
             get
@@ -49,6 +53,7 @@ namespace RSWEB_project.Models
                 return String.Format("{0} {1}", FirstName, LastName);
             }
         }
+
         public ICollection<Enrollment> Enrollments { get; set; }
     }
 }

@@ -1,0 +1,62 @@
+﻿@model UnenrollMultipleViewModel
+
+@{
+    ViewData["Title"] = "AdminEditMultiple";
+}
+
+<div style="text-align: center;">
+    <a class="btn btn-primary" asp-action="Index">BACK - Enrollments</a>
+</div>
+
+<hr style="width: 20%;"/>
+
+<form asp-action="AdminEditMultiple" style="width: 25%; margin: auto;" method="get">
+    <div class="form-group">
+        <label asp-for="CourseId" class="control-label">Courses</label>
+        <select asp-for="CourseId" class="form-control" asp-items="@ViewBag.Courses">
+            <option value="" disabled selected></option>
+        </select>
+        <span asp-validation-for="CourseId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Year" class="control-label"></label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Get Enrollments" class="btn btn-outline-secondary" />
+    </div>
+</form>
+
+<hr style="width: 20%;"/>
+
+<form asp-action="AdminEditMultiple" style="width: 25%; margin: auto;" method="post">
+    <div class="form-group">
+        <label asp-for="EnrollmentIds" class="control-label">Enrollments</label>
+        <select asp-for="EnrollmentIds" class="form-control js-example-basic-multiple" multiple="multiple" asp-items="@ViewBag.Enrollments">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="FinishDate" class="control-label"></label>
+        <input asp-for="FinishDate" class="form-control" />
+        <span asp-validation-for="FinishDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save Changes" class="btn btn-success" />
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/select2/js/select2.js"></script>
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
+}

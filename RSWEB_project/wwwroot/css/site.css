@@ -117,3 +117,8 @@ body {
 .table a{
     color: inherit;
 }
+
+.table-hover-custom tbody tr:hover {
+    background-color: #343a40;
+    color: #fff;
+}

@@ -35,6 +35,10 @@ namespace RSWEB_project.Models
         [Display(Name = "Hire Date")]
         public DateTime HireDate { get; set; }
 
+        [Display(Name = "Profile Picture")]
+        public string ProfilePicture { get; set; }
+
+        [Display(Name = "Full Name")]
         public string FullName
         {
             get

@@ -6,7 +6,7 @@
 
 <div style="text-align: center;">
     <a class="btn btn-primary" asp-action="Index">BACK</a>
-    <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">EDIT</a>
+    <a class="btn btn-info" asp-action="AdminEdit" asp-route-id="@Model.Id">EDIT</a>
     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">DELETE</a>
 </div>
 
@@ -66,6 +66,12 @@
     </dt>
     <dd class="col-sm-9">
         @Html.DisplayFor(model => model.SeminalPoints)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.ProjectPoints)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.ProjectPoints)
     </dd>
     <dt class="col-sm-3">
         @Html.DisplayNameFor(model => model.AdditionalPoints)

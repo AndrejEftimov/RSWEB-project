@@ -12,6 +12,18 @@
 
 <dl class="row" style="width: 59%; margin-left: 39%;">
     <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Course)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Course.Title)
+    </dd>
+    <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.Student)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.Student.FirstName)
+    </dd>
+    <dt class="col-sm-3">
         @Html.DisplayNameFor(model => model.Semester)
     </dt>
     <dd class="col-sm-9">
@@ -54,6 +66,12 @@
         @Html.DisplayFor(model => model.SeminalPoints)
     </dd>
     <dt class="col-sm-3">
+        @Html.DisplayNameFor(model => model.ProjectPoints)
+    </dt>
+    <dd class="col-sm-9">
+        @Html.DisplayFor(model => model.ProjectPoints)
+    </dd>
+    <dt class="col-sm-3">
         @Html.DisplayNameFor(model => model.AdditionalPoints)
     </dt>
     <dd class="col-sm-9">
@@ -64,18 +82,6 @@
     </dt>
     <dd class="col-sm-9">
         @Html.DisplayFor(model => model.FinishDate)
-    </dd>
-    <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.Course)
-    </dt>
-    <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.Course.Title)
-    </dd>
-    <dt class="col-sm-3">
-        @Html.DisplayNameFor(model => model.Student)
-    </dt>
-    <dd class="col-sm-9">
-        @Html.DisplayFor(model => model.Student.FirstName)
     </dd>
 </dl>
 

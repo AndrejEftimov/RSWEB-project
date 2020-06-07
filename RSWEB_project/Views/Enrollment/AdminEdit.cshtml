@@ -1,0 +1,41 @@
+﻿@model Enrollment
+
+@{
+    ViewData["Title"] = "AdminEdit";
+}
+
+<div style="text-align: center;">
+    <a class="btn btn-primary" asp-action="Details" asp-route-id="@Model.Id">BACK</a>
+</div>
+
+<hr />
+
+<form asp-action="AdminEdit" style="width: 25%; margin: auto;">
+
+    <input type="hidden" asp-for="Id" />
+    <select asp-for="CourseId" class="form-control" hidden></select>
+    <select asp-for="StudentId" class="form-control" hidden></select>
+    <input asp-for="Semester" class="form-control" hidden />
+    <input asp-for="Year" class="form-control" hidden />
+    <input asp-for="Grade" class="form-control" hidden />
+    <input asp-for="SeminalUrl" class="form-control" hidden />
+    <input asp-for="ProjectUrl" class="form-control" hidden />
+    <input asp-for="ExamPoints" class="form-control" hidden />
+    <input asp-for="SeminalPoints" class="form-control" hidden />
+    <input asp-for="ProjectPoints" class="form-control" hidden />
+    <input asp-for="AdditionalPoints" class="form-control" hidden />
+
+    <div class="form-group">
+        <label asp-for="FinishDate" class="control-label"></label>
+        <input asp-for="FinishDate" class="form-control" />
+        <span asp-validation-for="FinishDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save Changes" class="btn btn-success" />
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -23,6 +23,11 @@ namespace RSWEB_project.Controllers
             return View();
         }
 
+        public IActionResult AdminIndex()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

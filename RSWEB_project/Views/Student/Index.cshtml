@@ -8,13 +8,13 @@
 <form asp-controller="Student" asp-action="Index" method="get" style="margin-bottom: 16px; margin-left: 3%; width: 44%; display: inline-block;">
     <input class="input-global" type="text" name="courseString" placeholder=" Course">
     <input class="input-global" type="text" name="SearchString" placeholder=" Id or Name">
-    <input class="input-global" type="submit" value="Search"/>
+    <input class="input-global" type="submit" value="Search" />
 </form>
 
-<a style="display: inline-block; font-size: 18px;"asp-action="Create">Add new entry</a>
+<a style="display: inline-block; font-size: 18px;" asp-action="Create">Add new entry</a>
 
 <div class="table-responsive">
-    <table class="table table-striped table-borderless">
+    <table class="table table-striped table-borderless table-hover-custom">
         <thead class="thead-dark">
             <tr>
                 <th>
@@ -56,35 +56,35 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var s in Model)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.StudentId)
+                        @Html.DisplayFor(modelItem => s.StudentId)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
+                        @Html.DisplayFor(modelItem => s.FirstName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
+                        @Html.DisplayFor(modelItem => s.LastName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                        @Html.DisplayFor(modelItem => s.EnrollmentDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AcquiredCredits)
+                        @Html.DisplayFor(modelItem => s.AcquiredCredits)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CurrentSemester)
+                        @Html.DisplayFor(modelItem => s.CurrentSemester)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EducationLevel)
+                        @Html.DisplayFor(modelItem => s.EducationLevel)
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">View Details &raquo; </a>
+                        <a asp-action="Details" asp-route-id="@s.Id">View Details &raquo; </a>
                     </td>
                 </tr>
-                }
+            }
         </tbody>
     </table>
 </div>
